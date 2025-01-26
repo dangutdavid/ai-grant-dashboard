@@ -92,9 +92,12 @@ for i, grant in enumerate(grants):
 
     # Calculate days left to apply
     if "deadline" in grant:
-        deadline = datetime.strptime(grant["deadline"], "%Y-%m-%d")
-        days_left = (deadline - datetime.now()).days
-        st.write(f"**Days Left to Apply:** {days_left} days")
+        try:
+            deadline = datetime.strptime(grant["deadline"], "%Y-%m-%d")
+            days_left = (deadline - datetime.now()).days
+            st.write(f"**Days Left to Apply:** {days_left} days")
+        except Exception as e:
+            st.write("**Deadline:** N/A")
 
     st.subheader("Recommendations:")
     grant_recommendations = recommendations[i]["recommendations"]
